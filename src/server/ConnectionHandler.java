@@ -2,28 +2,29 @@ package server;
 
 import java.net.*;
 import java.util.ArrayList;
-
-import javax.swing.MenuElement;
-
-import client.ClientController;
 import java.io.*;
 import a32Pack.*;
 
 /**
- * ConnectionHandler
+ * ConnectionHandler - handles server-cloent connectino
  */
 public class ConnectionHandler implements Runnable, Config {
 
     private Socket client;
     private static ArrayList<ConnectionHandler> list = new ArrayList<>();
     private BufferedReader in; // Reader
-    private BufferedReader stdIn; // Reader
 
     private BufferedWriter out; // Writer
     private String username; // Username
     private ServerController control; // Controller
     private String stats; // Stats
 
+    /**
+     * Constructor for connection hnadler
+     * 
+     * @param clientSocket socket obj
+     * @param control      Servercontroller obj
+     */
     public ConnectionHandler(Socket clientSocket, ServerController control) {
         try {
             client = clientSocket;
@@ -43,6 +44,9 @@ public class ConnectionHandler implements Runnable, Config {
 
     }
 
+    /**
+     * Run methpd
+     */
     public void run() {
         String messageFromClient;
         while (!client.isClosed()) {
@@ -62,6 +66,11 @@ public class ConnectionHandler implements Runnable, Config {
         }
     }
 
+    /**
+     * Broadcast message
+     * 
+     * @param message String message
+     */
     public void broadcastMessage(String message) {
         if (message == null)
             return;
@@ -180,6 +189,9 @@ public class ConnectionHandler implements Runnable, Config {
         }
     }
 
+    /**
+     * Scorecheck method
+     */
     public void scoreCheck() {
         String[] stats = new String[list.size()];
         control.getEventLog().append("Score Check!!!\n");
