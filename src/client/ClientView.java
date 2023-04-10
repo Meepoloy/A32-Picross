@@ -104,7 +104,7 @@ public class ClientView extends JFrame implements Config {
         pointsKeeper = new JTextField();
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
+        this.setResizable(false);
     }
 
     /**
